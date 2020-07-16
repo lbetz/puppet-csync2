@@ -8,9 +8,16 @@ group <%= @group %> {
       nossl;
 <% end -%>
       key <%= @key_path %>;
-<% if @blocks['includes'] -%>
-<% @blocks['includes'].each do |b| %>
-      include <%= b %>;
+<% @blocks.each do |b,v| %>
+<% if v['includes'] -%>
+<% v['includes'].each do |i| -%>
+      include <%= i %>;
+<% end -%>
+<% end -%>
+<% if v['excludes'] -%>
+<% v['excludes'].each do |e| -%>
+      exclude <%= e %>;
+<% end -%>
 <% end -%>
 <% end -%>
 

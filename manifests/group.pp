@@ -12,7 +12,7 @@ define csync2::group (
   Stdlib::Absolutepath       $key_path = "/etc/csync2.key_${group}",
   Boolean                    $ssl      = true,  
   Enum['none', 'younger']    $auto     = 'younger',
-  Optional[Hash]             $blocks   = undef,
+  Hash                       $blocks   = {},
 ) {
 
   require ::csync2
