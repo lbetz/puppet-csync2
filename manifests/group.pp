@@ -5,14 +5,14 @@
 #   csync2::group { 'newgroup': }
 #
 define csync2::group (
-  Array[Stdlib::Host]        $hosts,
-  String                     $key,
-  Enum['present', 'absent']  $ensure   = 'present',
-  String                     $group    = $title,
-  Stdlib::Absolutepath       $key_path = "/etc/csync2.key_${group}",
-  Boolean                    $ssl      = true,  
-  Enum['none', 'younger']    $auto     = 'younger',
-  Hash                       $blocks   = {},
+  Array[Stdlib::Host]                $hosts,
+  String                             $key,
+  Enum['present', 'absent']          $ensure   = 'present',
+  String                             $group    = $title,
+  Stdlib::Absolutepath               $key_path = "/etc/csync2.key_${group}",
+  Boolean                            $ssl      = true,  
+  Hash[Integer,Csync2::GroupBlock]   $blocks   = {},
+  Enum['none', 'younger']            $auto     = 'younger',
 ) {
 
   require ::csync2

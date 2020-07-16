@@ -19,6 +19,22 @@ group <%= @group %> {
       exclude <%= e %>;
 <% end -%>
 <% end -%>
+<% if v['actions'] -%>
+<% v['actions'].each do |i,a| -%>
+      action {
+<% a['pattern'].each do |pattern| -%>
+            pattern <%= pattern %>;
+<% end -%>
+<% a['exec'].each do |exec| -%>
+            exec "<%= exec %>";
+<% end -%>
+<% if a['logfile'] -%>
+            logfile "<%= a['logfile'] %>";
+<% end -%>
+            <%= a['do'] %>;
+      }
+<% end -%>
+<% end -%>
 <% end -%>
 
       auto <%= @auto %>;
