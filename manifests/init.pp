@@ -26,7 +26,7 @@ class csync2(
 
   Class['csync2::install']
     -> Class['csync2::config']
-    -> Class['csync2::service']
+    ~> Class['csync2::service']
 
   contain csync2::install
   contain csync2::config
