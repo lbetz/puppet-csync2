@@ -17,18 +17,20 @@ class csync2::install {
       ensure => installed,
     }
   }
-  
-  file {
-    default:
-      ensure => file,
-      owner  => 'root',
-      group  => 'root';
-    $ssl_cert_file:
-      content => $ssl_cert,
-      mode    => '0644';
-    $ssl_key_file:
-      content => $ssl_key,
-      mode    => '0600';
+
+  if $::csync2::manage_cert {
+    file {
+      default:
+        ensure => file,
+        owner  => 'root',
+        group  => 'root';
+      $ssl_cert_file:
+        content => $ssl_cert,
+        mode    => '0644';
+      $ssl_key_file:
+        content => $ssl_key,
+        mode    => '0600';
+    }
   }
 
   systemd::unit_file { 'csync2@.service':
