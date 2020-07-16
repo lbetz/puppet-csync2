@@ -18,8 +18,10 @@ class csync2(
   Optional[String]          $service_name   = undef,
 ) {
 
-  unless $ssl_cert and $ssl_key {
-    fail('Both of ssl_cert and ssl_key must be set.')
+  if $ssl_cert or $ssl_key {
+    unless $ssl_cert and $ssl_key {
+      fail('Both of ssl_cert and ssl_key must be set.')
+    }
   }
 
   Class['csync2::install']
