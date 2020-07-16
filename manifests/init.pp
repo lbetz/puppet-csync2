@@ -13,8 +13,8 @@ class csync2(
   Stdlib::Ensure::Service   $ensure         = 'running',
   Boolean                   $enable         = true,
   Boolean                   $manage_package = false,
-  Optional[String]          $ssl_cert       = undef,
-  Optional[String]          $ssl_key        = undef,
+  Optional[Stdlib::Base64]  $ssl_cert       = undef,
+  Optional[Stdlib::Base64]  $ssl_key        = undef,
   Optional[String]          $service_name   = undef,
 ) {
 
