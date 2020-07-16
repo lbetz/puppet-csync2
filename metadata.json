@@ -1,0 +1,40 @@
+{
+  "name": "lbetz-csync2",
+  "version": "0.1.0",
+  "author": "Lennart Betz",
+  "summary": "Manage the cluster software Csync2",
+  "license": "Apache-2.0",
+  "source": "https://github.com/LINBIT/csync2",
+  "dependencies": [
+
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.10.0 < 7.0.0"
+    }
+  ],
+  "pdk-version": "1.17.0",
+  "template-url": "pdk-default#1.17.0",
+  "template-ref": "tags/1.17.0-0-gd3a4319"
+}

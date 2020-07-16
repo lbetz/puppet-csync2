@@ -1,0 +1,5 @@
+---
+csync2::config_file: /etc/csync2.cfg
+csync2::csync2_bin: /usr/sbin/csync2
+csync2::ssl_cert_file: /etc/csync2_ssl_cert.pem
+csync2::ssl_key_file: /etc/csync2_ssl_key.pem

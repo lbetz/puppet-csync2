@@ -1,0 +1,18 @@
+
+group <%= @group %> {
+<% @hosts.each do |i| -%>
+      host <%= i %>;
+<% end -%>
+
+<% unless @ssl -%>
+      nossl;
+<% end -%>
+      key <%= @key_path %>;
+<% if @blocks['includes'] -%>
+<% @blocks['includes'].each do |b| %>
+      include <%= b %>;
+<% end -%>
+<% end -%>
+
+      auto <%= @auto %>;
+}
