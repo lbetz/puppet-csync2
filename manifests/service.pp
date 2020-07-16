@@ -6,17 +6,14 @@
 #
 class csync2::service {
 
-  $ensure     = $::csync2::ensure
-  $enable     = $::csync2::enable
-  $csync2_bin = $::csync2::csync2_bin
-  $port       = $::csync2::port
+  $ensure       = $::csync2::ensure
+  $enable       = $::csync2::enable
+  $service_name = $::csync2::service_name
+  $csync2_bin   = $::csync2::csync2_bin
+  $port         = $::csync2::port
 
-  systemd::unit_file { 'csync2@.service':
-    content => template('csync2/service_unit.erb'),
+  service { $service_name:
+    ensure => $ensure,
+    enable => $enable,
   }
-  
-  systemd::unit_file { 'csync2.socket':
-    content => template('csync2/service_socket.erb'),
-  }
-  
 }

@@ -5,15 +5,19 @@
 #
 class csync2::install {
 
-  $ssl_cert_file = $::csync2::ssl_cert_file
-  $ssl_cert      = $::csync2::ssl_cert
-  $ssl_key_file  = $::csync2::ssl_key_file
-  $ssl_key       = $::csync2::ssl_key
+  $package_name   = $::csync2::package_name
+  $manage_package = $::csync2::manage_package
+  $ssl_cert_file  = $::csync2::ssl_cert_file
+  $ssl_cert       = $::csync2::ssl_cert
+  $ssl_key_file   = $::csync2::ssl_key_file
+  $ssl_key        = $::csync2::ssl_key
 
-  unless $ssl_cert and $ssl_key {
-    fail('Both of ssl_cert and ssl_key must be set.')
+  if $manage_package {
+    package { $package_name:
+      ensure => installed,
+    }
   }
-
+  
   file {
     default:
       ensure => file,
@@ -25,6 +29,14 @@ class csync2::install {
     $ssl_key_file:
       content => $ssl_key,
       mode    => '0600';
+  }
+
+  systemd::unit_file { 'csync2@.service':
+    content => template('csync2/service_unit.erb'),
+  }
+ 
+  systemd::unit_file { 'csync2.socket':
+    content => template('csync2/service_socket.erb'),
   }
 
 }
