@@ -8,7 +8,7 @@ group <%= @group %> {
       nossl;
 <% end -%>
       key <%= @key_path %>;
-<% @blocks.each do |b,v| %>
+<% @blocks.each do |v| %>
 <% if v['includes'] -%>
 <% v['includes'].each do |i| -%>
       include <%= i %>;
@@ -20,7 +20,7 @@ group <%= @group %> {
 <% end -%>
 <% end -%>
 <% if v['actions'] -%>
-<% v['actions'].each do |i,a| -%>
+<% v['actions'].each do |a| -%>
       action {
 <% a['pattern'].each do |pattern| -%>
             pattern <%= pattern %>;
