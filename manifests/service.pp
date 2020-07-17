@@ -6,12 +6,15 @@
 #
 class csync2::service {
 
-  $service_name = $::csync2::globals::service_name
-  $ensure       = $::csync2::ensure
-  $enable       = $::csync2::enable
+  $service_name   = $::csync2::globals::service_name
+  $manage_service = $::csync2::manage_service
+  $ensure         = $::csync2::ensure
+  $enable         = $::csync2::enable
 
-  service { $service_name:
-    ensure => $ensure,
-    enable => $enable,
+  if $manage_service {
+    service { $service_name:
+      ensure => $ensure,
+      enable => $enable,
+    }
   }
 }

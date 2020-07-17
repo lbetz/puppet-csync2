@@ -8,6 +8,7 @@ class csync2::config {
   $ssl_cert_path  = $::csync2::globals::ssl_cert_path
   $ssl_key_path   = $::csync2::globals::ssl_key_path
   $csync2_bin     = $::csync2::globals::csync2_bin
+  $manage_systemd = $::csync2::manage_systemd
   $ssl_cert       = $::csync2::ssl_cert
   $ssl_key        = $::csync2::ssl_key
   $port           = $::csync2::port
@@ -27,12 +28,14 @@ class csync2::config {
     }
   }
 
-  systemd::unit_file { 'csync2@.service':
-    content => template('csync2/service_unit.erb'),
-  }
+  if $manage_systemd {
+    systemd::unit_file { 'csync2@.service':
+      content => template('csync2/service_unit.erb'),
+    }
 
-  systemd::unit_file { 'csync2.socket':
-    content => template('csync2/service_socket.erb'),
+    systemd::unit_file { 'csync2.socket':
+      content => template('csync2/service_socket.erb'),
+    }
   }
 
 }

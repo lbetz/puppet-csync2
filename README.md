@@ -1,8 +1,5 @@
 # csync2
 
-Welcome to your new module. A short overview of the generated parts can be found in the PDK documentation at https://puppet.com/pdk/latest/pdk_generating_modules.html .
-
-The README template below provides a starting point with details about what information to include in your README.
 
 #### Table of Contents
 
@@ -17,9 +14,9 @@ The README template below provides a starting point with details about what info
 
 ## Description
 
-Briefly tell users why they might want to use your module. Explain what your module does and what kind of problems users can solve with it.
+Csync2 is a cluster synchronization tool. It can be used to keep files on multiple hosts in a cluster in sync. Csync2 can handle complex setups with much more than just 2 hosts, handle file deletions and can detect conflicts.
 
-This should be a fairly short description helps the user decide if your module is what they want.
+The module configures Csync2 and optionally installs the package from an reconfigured repository.
 
 ## Setup
 

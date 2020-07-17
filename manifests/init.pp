@@ -24,8 +24,14 @@
 # @param [Boolean] manage_package
 #   Whether to install a Csync2 package.
 #
+# @param [Boolean] manage_service
+#   Whether to handle the Csync2 service.
+#
+# @param [Boolean] manage_systemd
+#   Wether to install unit files for the use of systemd.
+#
 # @param [Stdlib::Port::Unprivileged] port
-#   Port ion Csync2 listens.
+#   Port ion Csync2 listens. Only effects if systemd is used.
 #
 # @param [Optional[Stdlib::Base64]] ssl_cert
 #   The certificate to use for TLS connections. It will be stored into the file specified in ssl_cert_path.
@@ -41,6 +47,8 @@ class csync2(
   Stdlib::Ensure::Service      $ensure         = 'running',
   Boolean                      $enable         = true,
   Boolean                      $manage_package = false,
+  Boolean                      $manage_service = true,
+  Boolean                      $manage_systemd = true,
   Stdlib::Port::Unprivileged   $port           = 30865,
   Optional[Stdlib::Base64]     $ssl_cert       = undef,
   Optional[Stdlib::Base64]     $ssl_key        = undef,
