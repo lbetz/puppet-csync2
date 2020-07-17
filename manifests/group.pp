@@ -64,7 +64,7 @@ define csync2::group (
   Enum['present', 'absent']   $ensure   = 'present',
   String                      $group    = $title,
   Stdlib::Absolutepath        $key_path = "/etc/csync2.key_${group}",
-  Boolean                     $ssl      = true,  
+  Boolean                     $ssl      = true,
   Array[Csync2::GroupBlock]   $blocks   = {},
   Enum['none', 'younger']     $auto     = 'younger',
 ) {

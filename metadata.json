@@ -6,7 +6,18 @@
   "license": "Apache-2.0",
   "source": "https://github.com/LINBIT/csync2",
   "dependencies": [
-
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 5.0.0 < 7.0.0"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 2.1.0 < 7.0.0"
+    },
+    {
+      "name": "camptocamp/systemd",
+      "version_requirement": ">= 2.1.0 < 3.0.0"
+    }
   ],
   "operatingsystem_support": [
     {
@@ -31,7 +42,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.10.0 < 7.0.0"
+      "version_requirement": ">= 4.10.10 < 7.0.0"
     }
   ],
   "pdk-version": "1.17.0",

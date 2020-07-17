@@ -14,7 +14,7 @@ class csync2::install {
       ensure => installed,
     }
   }
-  
+
   concat { $config_file:
     ensure => present,
     owner  => 'root',
