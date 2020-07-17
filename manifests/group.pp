@@ -44,7 +44,7 @@
 # @param [Enum['present', 'absent']] ensure
 #   Wether to use or to remove the group.
 #
-# @param [Stdlib::Absolutepath] key_path
+# @param Optional[[Stdlib::Absolutepath]] key_path
 #   Path to the file the key will save to.
 #
 # @param [Array[Csync2::GroupBlock] blocks
@@ -56,22 +56,28 @@
 #   Set resolution method if files have conflicts and doesn't know which to use.
 #
 define csync2::group (
-  Array[Stdlib::Host]         $hosts,
-  String                      $key,
-  Enum['present', 'absent']   $ensure   = 'present',
-  String                      $group    = $title,
-  Stdlib::Absolutepath        $key_path = "/etc/csync2.key_${group}",
-  Array[Csync2::GroupBlock]   $blocks   = {},
-  Enum['none', 'younger']     $auto     = 'younger',
+  Array[Stdlib::Host]             $hosts,
+  String                          $key,
+  Enum['present', 'absent']       $ensure   = 'present',
+  String                          $group    = $title,
+  Optional[Stdlib::Absolutepath]  $key_path = undef,
+  Array[Csync2::GroupBlock]       $blocks   = {},
+  Enum['none', 'younger']         $auto     = 'younger',
 ) {
 
   require ::csync2
 
-  $config_file = $::csync2::globals::config_file
+  $config_dir = $::csync2::globals::config_dir
+  $config_path = $::csync2::globals::config_path
+
+  unless $key_path {
+    $_key_path = "${config_dir}/csync2.key_${group}"
+  } else {
+    $_key_path = $key_path }
 
   if $ensure == 'present' {
     concat::fragment { "csync2-group-${group}":
-      target  => $config_file,
+      target  => $config_path,
       content => template('csync2/group.erb'),
     }
 
@@ -80,7 +86,7 @@ define csync2::group (
     $key_path_ensure = 'absent'
   }
 
-  file { $key_path:
+  file { $_key_path:
     ensure  => $key_path_ensure,
     owner   => 'root',
     group   => 'root',

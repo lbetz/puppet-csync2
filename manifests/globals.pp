@@ -9,7 +9,10 @@
 # @param [String] service_name
 #   Name of the service to manage for Csync2.
 #
-# @param [Stdlib::Absolutepath] config_file
+# @param [Stdlib::Absolutepath] config_dir
+#   Directory where Csync2 expected config, cert and key files.
+#
+# @param [Stdlib::Absolutepath] config_path
 #   Path to the configuration file.
 #
 # @param [Stdlib::Absolutepath] csync2_bin
@@ -24,7 +27,8 @@
 class csync2::globals(
   String                       $package_name,
   String                       $service_name,
-  Stdlib::Absolutepath         $config_file,
+  Stdlib::Absolutepath         $config_dir,
+  Stdlib::Absolutepath         $config_path,
   Stdlib::Absolutepath         $csync2_bin,
   Stdlib::Absolutepath         $ssl_cert_path,
   Stdlib::Absolutepath         $ssl_key_path,

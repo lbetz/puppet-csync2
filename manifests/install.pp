@@ -6,7 +6,7 @@
 class csync2::install {
 
   $package_name   = $::csync2::globals::package_name
-  $config_file    = $::csync2::globals::config_file
+  $config_path    = $::csync2::globals::config_path
   $manage_package = $::csync2::manage_package
 
   if $manage_package {
@@ -15,7 +15,7 @@ class csync2::install {
     }
   }
 
-  concat { $config_file:
+  concat { $config_path:
     ensure => present,
     owner  => 'root',
     group  => 'root',
