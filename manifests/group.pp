@@ -47,9 +47,6 @@
 # @param [Stdlib::Absolutepath] key_path
 #   Path to the file the key will save to.
 #
-# @param [Boolean] ssl
-#   Wether to turn on TLS.
-#
 # @param [Array[Csync2::GroupBlock] blocks
 #   Manages blocks of config snippets. A block has to be of datatype Hash and consists of
 #   'includes', 'excludes' and 'actions' as keys. The 'actions' are also an Array of Hashes
@@ -64,7 +61,6 @@ define csync2::group (
   Enum['present', 'absent']   $ensure   = 'present',
   String                      $group    = $title,
   Stdlib::Absolutepath        $key_path = "/etc/csync2.key_${group}",
-  Boolean                     $ssl      = true,
   Array[Csync2::GroupBlock]   $blocks   = {},
   Enum['none', 'younger']     $auto     = 'younger',
 ) {

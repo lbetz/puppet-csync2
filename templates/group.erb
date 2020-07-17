@@ -4,9 +4,6 @@ group <%= @group %> {
       host <%= i %>;
 <% end -%>
 
-<% unless @ssl -%>
-      nossl;
-<% end -%>
       key <%= @key_path %>;
 <% @blocks.each do |v| %>
 <% if v['includes'] -%>
