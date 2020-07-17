@@ -5,9 +5,9 @@
 #
 class csync2::config {
 
-  $ssl_cert_file  = $::csync2::ssl_cert_file
+  $ssl_cert_path  = $::csync2::ssl_cert_path
   $ssl_cert       = $::csync2::ssl_cert
-  $ssl_key_file   = $::csync2::ssl_key_file
+  $ssl_key_path   = $::csync2::ssl_key_path
   $ssl_key        = $::csync2::ssl_key
   $csync2_bin     = $::csync2::csync2_bin
   $port           = $::csync2::port
@@ -18,10 +18,10 @@ class csync2::config {
         ensure => file,
         owner  => 'root',
         group  => 'root';
-      $ssl_cert_file:
+      $ssl_cert_path:
         content => $ssl_cert,
         mode    => '0644';
-      $ssl_key_file:
+      $ssl_key_path:
         content => $ssl_key,
         mode    => '0600';
     }

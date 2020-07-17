@@ -27,10 +27,10 @@
 # @param [Stdlib::Absolutepath] csync2_bin
 #   Path to the Cysnc2 binary.
 #
-# @param [Stdlib::Absolutepath] ssl_cert_file
+# @param [Stdlib::Absolutepath] ssl_cert_path
 #   Path to the fiile includes the certificate.
 #
-# @param [Stdlib::Absolutepath] ssl_key_file
+# @param [Stdlib::Absolutepath] ssl_key_path
 #   Path to the file includes the private key.
 #
 # @param [Stdlib::Port::Unprivileged] port
@@ -46,22 +46,22 @@
 #   Whether to install a Csync2 package.
 #
 # @param [Optional[Stdlib::Base64]] ssl_cert
-#   The certificate to use for TLS connections. It will be stored into the file specified in ssl_cert_file.
+#   The certificate to use for TLS connections. It will be stored into the file specified in ssl_cert_path.
 #   If is set, you've also to set parameter ssl_key. Leaving both unset, you must manage the content of
-#   ssl_cert_file and ssl_key_file yourself.
+#   ssl_cert_path and ssl_key_path yourself.
 #
 # @param [Optional[Stdlib::Base64]] ssl_key
-#   The private key to use for TLS connections. It will be stored into the file specified in ssl_key_file.
+#   The private key to use for TLS connections. It will be stored into the file specified in ssl_key_path.
 #   If is set, you've also to set parameter ssl_cert. Leaving both unset, you must manage the content of
-#   ssl_cert_file and ssl_key_file yourself.
+#   ssl_cert_path and ssl_key_path yourself.
 #
 class csync2(
   String                       $package_name,
   String                       $service_name,
   Stdlib::Absolutepath         $config_file,
   Stdlib::Absolutepath         $csync2_bin,
-  Stdlib::Absolutepath         $ssl_cert_file,
-  Stdlib::Absolutepath         $ssl_key_file,
+  Stdlib::Absolutepath         $ssl_cert_path,
+  Stdlib::Absolutepath         $ssl_key_path,
   Stdlib::Port::Unprivileged   $port,
   Stdlib::Ensure::Service      $ensure         = 'running',
   Boolean                      $enable         = true,
