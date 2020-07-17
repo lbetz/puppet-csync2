@@ -15,27 +15,6 @@
 #     ssl_key  => '----BEGIN RSA PRIVATE KEY----- ...',
 #   }
 #
-# @param [String] package_name
-#   Package name to manage.
-#
-# @param [String] service_name
-#   Name of the service to manage for Csync2.
-#
-# @param [Stdlib::Absolutepath] config_file
-#   Path to the configuration file.
-#
-# @param [Stdlib::Absolutepath] csync2_bin
-#   Path to the Cysnc2 binary.
-#
-# @param [Stdlib::Absolutepath] ssl_cert_path
-#   Path to the fiile includes the certificate.
-#
-# @param [Stdlib::Absolutepath] ssl_key_path
-#   Path to the file includes the private key.
-#
-# @param [Stdlib::Port::Unprivileged] port
-#   Port ion Csync2 listens.
-#
 # @param [Stdlib::Ensure::Service] ensure
 #   Whether the Csync2 service should be running or is stopped.
 #
@@ -44,6 +23,9 @@
 #
 # @param [Boolean] manage_package
 #   Whether to install a Csync2 package.
+#
+# @param [Stdlib::Port::Unprivileged] port
+#   Port ion Csync2 listens.
 #
 # @param [Optional[Stdlib::Base64]] ssl_cert
 #   The certificate to use for TLS connections. It will be stored into the file specified in ssl_cert_path.
@@ -56,19 +38,15 @@
 #   ssl_cert_path and ssl_key_path yourself.
 #
 class csync2(
-  String                       $package_name,
-  String                       $service_name,
-  Stdlib::Absolutepath         $config_file,
-  Stdlib::Absolutepath         $csync2_bin,
-  Stdlib::Absolutepath         $ssl_cert_path,
-  Stdlib::Absolutepath         $ssl_key_path,
-  Stdlib::Port::Unprivileged   $port,
   Stdlib::Ensure::Service      $ensure         = 'running',
   Boolean                      $enable         = true,
   Boolean                      $manage_package = false,
+  Stdlib::Port::Unprivileged   $port           = 30865,
   Optional[Stdlib::Base64]     $ssl_cert       = undef,
   Optional[Stdlib::Base64]     $ssl_key        = undef,
 ) {
+
+  require ::csync2::globals
 
   if $ssl_cert or $ssl_key {
     unless $ssl_cert and $ssl_key {

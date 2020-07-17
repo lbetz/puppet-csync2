@@ -67,7 +67,7 @@ define csync2::group (
 
   require ::csync2
 
-  $config_file = $::csync2::config_file
+  $config_file = $::csync2::globals::config_file
 
   if $ensure == 'present' {
     concat::fragment { "csync2-group-${group}":

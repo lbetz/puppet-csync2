@@ -6,9 +6,9 @@
 #
 class csync2::service {
 
+  $service_name = $::csync2::globals::service_name
   $ensure       = $::csync2::ensure
   $enable       = $::csync2::enable
-  $service_name = $::csync2::service_name
 
   service { $service_name:
     ensure => $ensure,
