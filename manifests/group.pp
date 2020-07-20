@@ -44,10 +44,10 @@
 # @param [Enum['present', 'absent']] ensure
 #   Wether to use or to remove the group.
 #
-# @param Optional[[Stdlib::Absolutepath]] key_path
+# @param [Optional[Stdlib::Absolutepath]] key_path
 #   Path to the file the key will save to.
 #
-# @param [Array[Csync2::GroupBlock] blocks
+# @param [Array[Csync2::GroupBlock]] blocks
 #   Manages blocks of config snippets. A block has to be of datatype Hash and consists of
 #   'includes', 'excludes' and 'actions' as keys. The 'actions' are also an Array of Hashes
 #   and has to constist of 'pattern', 'exec', 'logfile' and 'do' as keys.

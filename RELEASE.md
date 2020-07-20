@@ -28,15 +28,19 @@ Generate [REFERENCE.md] via [Puppet Strings]
 puppet strings generate --format markdown --out ./REFERENCE.md
 ```
 
-## 4. Changelog
-Generate [CHANGELOG.md]
-```bash
-github_changelog_generator -t <github-access-token> --future-release=<v1.0.0> -u <user> -p puppet-csync2
-```
-
-## 5. Version
+## 4. Version
 Version numbers are incremented regarding the [SemVer 1.0.0] specification. 
 Update the version number in `metadata.json`.
+
+## 5. Changelog
+If it is not installed [puppet-strings]:
+``` bash
+gem install puppet-strings --no-ri --no-rdoc
+```
+Generate [CHANGELOG.md]
+```bash
+pdk bundle exec rake changelog
+```
 
 ## 6. Git Tag
 Commit all changes to the `master` branch

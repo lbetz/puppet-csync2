@@ -1,10 +1,11 @@
 {
   "name": "lbetz-csync2",
   "version": "0.1.0",
-  "author": "Lennart Betz",
+  "author": "lbetz",
   "summary": "Manage the cluster software Csync2",
   "license": "Apache-2.0",
-  "source": "https://github.com/LINBIT/csync2",
+  "source": "https://github.com/lbetz/puppet-csync2",
+  "project_page": "https://github.com/lbetz/puppet-csync2",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
