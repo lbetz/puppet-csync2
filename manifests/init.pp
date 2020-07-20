@@ -9,7 +9,7 @@
 #     manage_package => true,
 #   }
 #
-# @example The management of certivivate and private key.
+# @example The management of certificate and private key.
 #   class { 'csync2':
 #     ssl_cert => '-----BEGIN CERTIFICATE----- ...',
 #     ssl_key  => '----BEGIN RSA PRIVATE KEY----- ...',
