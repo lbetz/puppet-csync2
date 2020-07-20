@@ -64,7 +64,7 @@ git push --tags
 
 ## 7. Build and Upload
 ``` bash
-pdk pdk module build
+pdk build
 ```
 Upload the tarball to Puppet Forge.
 
