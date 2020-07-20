@@ -9,13 +9,13 @@
 #### Public Classes
 
 * [`csync2`](#csync2): Manages cluster software Csync2.
-* [`csync2::install`](#csync2install): This class handles the insatll of csync2.
 
 #### Private Classes
 
 * `csync2::config`: This class exists to manage general configuration files needed by Csync2 to run.
 * `csync2::globals`: Manages cluster software Csync2.
 This class loads the default platform depending parameters by doing a hiera lookup.
+* `csync2::install`: This class handles the insatll of csync2.
 * `csync2::service`: This class handles the Csync2 service. By default the service will
 start on boot and will be restarted if stopped.
 
@@ -131,10 +131,6 @@ If is set, you've also to set parameter ssl_cert. Leaving both unset, you must m
 ssl_cert_path and ssl_key_path yourself.
 
 Default value: ``undef``
-
-### `csync2::install`
-
-# @api private
 
 ## Defined types
 

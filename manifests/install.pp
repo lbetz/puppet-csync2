@@ -1,7 +1,7 @@
 # @summary
 #   This class handles the insatll of csync2.
 # 
-# # @api private
+# @api private
 #
 class csync2::install {
 
