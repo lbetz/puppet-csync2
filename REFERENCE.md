@@ -36,10 +36,15 @@ Manages cluster software Csync2.
 
 #### Examples
 
-##### Configures an installed csync2 and also uses a preinstalled certivicate and private key.
+##### Configures an installed csync2 and also uses a preinstalled certificate and private key. Also a cronjob is needed to trigger the sync:
 
 ```puppet
 include csync2
+
+cron { 'csync2':
+  command => "${::csync2::globals::csync2_bin} -x",
+  user    => 'root',
+}
 ```
 
 ##### To install a package with non default name. But you've to handle a repository yourself.

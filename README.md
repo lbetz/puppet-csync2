@@ -131,6 +131,18 @@ csync2::group { 'monitoring':
 }
 ```
 
+### Cronjob
+
+To trigger the sync a cronjob is needed:
+```
+include csync2
+
+cron { 'csync2':
+  command => "${::csync2::globals::csync2_bin} -x",
+  user    => 'root',
+}
+```
+
 ## Reference
 
 See [REFERENCE.md](https://github.com/lbetz/puppet-csync2/blob/master/REFERENCE.md)
