@@ -78,6 +78,13 @@ class { 'csync2':
   manage_package => true,
 }
 ```
+To fix a bug in the package and add a missing link for using sqlite3, you've to add the followingto your code right behind package management:
+```
+file { '/usr/lib64/libsqlite3.so':
+  ensure => link,
+  target => '/usr/lib64/libsqlite3.so.0',
+}
+```
 
 ### Certificate
 
