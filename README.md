@@ -150,6 +150,47 @@ cron { 'csync2':
 }
 ```
 
+## xinetd instead of systemd
+
+You're able to use a xinetd instead of systemd service. If you do so, the port parameter hasn't any impact.
+```
+class { 'csync2':
+  ensure => stopped,
+  enable => false,
+}
+
+file { '/etc/xinetd.d/csync2':
+  ensure  => file,
+  content => "service csync2
+{
+        flags           = REUSE
+        socket_type     = stream
+        wait            = no
+        user            = root
+        group           = root
+        server          = ${::csync2::globals::csync2_bin}
+        server_args     = -i -l
+        #log_on_failure += USERID
+        disable         = no
+        # only_from     = 192.168.199.3 192.168.199.4
+}",
+  owner  => 'root',
+  mode   => '0644',
+}
+
+package { 'xinetd':
+  ensure => installed,
+  before => Service['xinetd'],
+}
+
+service { 'xinetd':
+  ensure    => running,
+  enable    => true,
+  subscribe => File['/etc/xinetd.d/csync2'],
+}
+```
+Maybe it's a better idea to use the [puppetlabs/xinetd] module to install, configure and manage xinetd.
+
 ## Reference
 
 See [REFERENCE.md](https://github.com/lbetz/puppet-csync2/blob/master/REFERENCE.md)
@@ -158,3 +199,4 @@ See [REFERENCE.md](https://github.com/lbetz/puppet-csync2/blob/master/REFERENCE.
 [puppetlabs/stdlib]: https://github.com/puppetlabs/puppetlabs-stdlib
 [puppetlabs/concat]: https://github.com/puppetlabs/puppetlabs-concat
 [camptpcamp/systemd]: https://github.com/camptocamp/puppet-systemd
+[puppetlabs/xinetd]: https://github.com/puppetlabs/puppetlabs-xinetd
