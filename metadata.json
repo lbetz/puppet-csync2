@@ -1,6 +1,6 @@
 {
   "name": "lbetz-csync2",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "lbetz",
   "summary": "Manage the cluster software Csync2",
   "license": "Apache-2.0",
@@ -21,6 +21,12 @@
     }
   ],
   "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
