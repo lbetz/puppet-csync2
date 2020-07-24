@@ -23,6 +23,10 @@ git commit -am "Update AUTHORS"
 ```
 
 ## 3. Reference
+If it is not installed [puppet-strings]:
+``` bash
+gem install puppet-strings --no-ri --no-rdoc
+```
 Generate [REFERENCE.md] via [Puppet Strings]
 ``` bash
 puppet strings generate --format markdown --out ./REFERENCE.md
@@ -33,10 +37,6 @@ Version numbers are incremented regarding the [SemVer 1.0.0] specification.
 Update the version number in `metadata.json`.
 
 ## 5. Changelog
-If it is not installed [puppet-strings]:
-``` bash
-gem install puppet-strings --no-ri --no-rdoc
-```
 Generate [CHANGELOG.md]
 ```bash
 pdk bundle exec rake changelog
