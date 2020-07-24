@@ -39,6 +39,7 @@ Update the version number in `metadata.json`.
 ## 5. Changelog
 Generate [CHANGELOG.md]
 ```bash
+export CHANGELOG_GITHUB_TOKEN=<valid_token_here>
 pdk bundle exec rake changelog
 ```
 
