@@ -59,7 +59,7 @@ By default the module only configures Csync2 to install the software a preconfig
 
 ### Software Installation 
 
-Setting the parameter manage_package to true will manage a package named 'csync2'.
+Declaration will manage a package named 'csync2'.
 
 On RHEL/CentOS 7:
 
@@ -74,9 +74,7 @@ package { 'okay-release-1-3':
   source   => 'http://repo.okay.com.mx/centos/7/x86_64/release/okay-release-1-3.el7.noarch.rpm'
 }
 
-class { 'csync2':
-  manage_package => true,
-}
+class { 'csync2': }
 ```
 To fix a bug in the package and add a missing link for using sqlite3, you've to add the followingto your code right behind package management:
 ```
