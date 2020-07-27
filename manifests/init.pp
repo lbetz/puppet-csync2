@@ -48,7 +48,7 @@
 class csync2(
   Stdlib::Ensure::Service      $ensure         = 'running',
   Boolean                      $enable         = true,
-  Boolean                      $manage_package = false,
+  Boolean                      $manage_package = true,
   Boolean                      $manage_service = true,
   Stdlib::Port::Unprivileged   $port           = 30865,
   Optional[Stdlib::Base64]     $ssl_cert       = undef,

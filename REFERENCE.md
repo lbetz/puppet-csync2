@@ -91,7 +91,7 @@ Data type: `Boolean`
 
 Whether to install a Csync2 package.
 
-Default value: ``false``
+Default value: ``true``
 
 ##### `manage_service`
 
