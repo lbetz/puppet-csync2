@@ -102,14 +102,16 @@ Or can be handeld before declaring 'csync2'.
 
 To sync the config file itself between two nodes:
 ```
-csync2::group { 'cluster':
-  hosts  => ['node1.example.org', 'node2.example.org'],
-  blocks => [
-    {
-      'includes' => [ '/etc/csync2.cfg' ],
+class { 'csync2':
+  groups => {
+    'cluster' => {
+      hosts  => ['node1.example.org', 'node2.example.org'],
+      blocks => [{
+        'includes' => [ '/etc/csync2.cfg' ],
+      }],
+      key    => 'supersecret',
     },
-  ],
-  key    => 'supersecret',
+  },
 }
 ```
 

@@ -1,6 +1,6 @@
 # @summary Manages cluster software Csync2.
 #
-# @example Configures an installed csync2 and also uses a preinstalled certificate and private key. Also a cronjob is needed to trigger the sync:
+# @example Configures and install csync2 and also uses a preinstalled certificate and private key. Also a cronjob is needed to trigger the sync:
 #   include csync2
 #
 #   cron { 'csync2':
@@ -8,16 +8,31 @@
 #     user    => 'root',
 #   }
 #
-# @example To install a package with non default name. But you've to handle a repository yourself.
-#   class { 'csync2':
-#     package_name   => 'my-csync2',
-#     manage_package => true,
-#   }
-#
 # @example The management of certificate and private key.
 #   class { 'csync2':
 #     ssl_cert => '-----BEGIN CERTIFICATE----- ...',
 #     ssl_key  => '----BEGIN RSA PRIVATE KEY----- ...',
+#   }
+#
+# @example Create two groups to sync. For more details have a look at defined resource 'group'.
+#   class { 'csync2':
+#     groups => {
+#       'cluster' => {
+#         hosts  => ['node1.example.org', 'node2.example.org'],
+#         blocks => [{
+#           'includes' => [ '/etc/csync2.cfg' ],
+#         }],
+#         key    => 'supersecret',
+#       },
+#       'monitoring' => {
+#         hosts  => ['node1.example.org', 'node2.example.org'],
+#         blocks => [{
+#           'includes' => [ '/etc/icingaweb2' ],
+#           'excludes' => [ '/etc/icingaweb2/modules/director', '/etc/icingaweb2/enabledModules/director' ],
+#         }],
+#         key    => 'supersecret',
+#       },
+#     },
 #   }
 #
 # @param [Stdlib::Ensure::Service] ensure
@@ -45,6 +60,9 @@
 #   If is set, you've also to set parameter ssl_cert. Leaving both unset, you must manage the content of
 #   ssl_cert_path and ssl_key_path yourself.
 #
+# @param [Hash[String,Hash]] groups
+#   Handles one or more groups.
+#
 class csync2(
   Stdlib::Ensure::Service      $ensure         = 'running',
   Boolean                      $enable         = true,
@@ -53,6 +71,7 @@ class csync2(
   Stdlib::Port::Unprivileged   $port           = 30865,
   Optional[Stdlib::Base64]     $ssl_cert       = undef,
   Optional[Stdlib::Base64]     $ssl_key        = undef,
+  Hash[String, Hash]           $groups         = {},
 ) {
 
   require ::csync2::globals
@@ -71,4 +90,9 @@ class csync2(
   contain csync2::config
   contain csync2::service
 
+  $groups.each |String $grp_name, Hash $grp_config| {
+    ::csync2::group { $grp_name:
+      * => $grp_config,
+    }
+  }
 }

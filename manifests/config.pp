@@ -34,5 +34,4 @@ class csync2::config {
   systemd::unit_file { 'csync2.socket':
     content => template('csync2/service_socket.erb'),
   }
-
 }

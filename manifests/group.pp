@@ -65,7 +65,7 @@ define csync2::group (
   Enum['none', 'younger']         $auto     = 'younger',
 ) {
 
-  require ::csync2
+  include ::csync2
 
   $config_dir = $::csync2::globals::config_dir
   $config_path = $::csync2::globals::config_path
