@@ -101,19 +101,11 @@ Whether to handle the Csync2 service.
 
 Default value: ``true``
 
-##### `manage_systemd`
-
-Data type: `Boolean`
-
-Wether to install unit files for the use of systemd.
-
-Default value: ``true``
-
 ##### `port`
 
 Data type: `Stdlib::Port::Unprivileged`
 
-Port ion Csync2 listens. Only effects if systemd is used.
+Port ion Csync2 listens. Only effects if service is used.
 
 Default value: `30865`
 
