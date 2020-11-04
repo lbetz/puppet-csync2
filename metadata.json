@@ -1,6 +1,6 @@
 {
   "name": "lbetz-csync2",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "lbetz",
   "summary": "Manage the cluster software Csync2",
   "license": "Apache-2.0",
