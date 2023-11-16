@@ -18,8 +18,8 @@ file { '/etc/xinetd.d/csync2':
 	disable		= no
 	# only_from	= 192.168.199.3 192.168.199.4
 }",
-  owner  => 'root',
-  mode   => '0644',
+  owner   => 'root',
+  mode    => '0644',
 }
 
 package { 'xinetd':

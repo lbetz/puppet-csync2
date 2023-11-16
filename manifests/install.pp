@@ -4,10 +4,11 @@
 # @api private
 #
 class csync2::install {
+  assert_private()
 
-  $package_name   = $::csync2::globals::package_name
-  $config_path    = $::csync2::globals::config_path
-  $manage_package = $::csync2::manage_package
+  $package_name   = $csync2::globals::package_name
+  $config_path    = $csync2::globals::config_path
+  $manage_package = $csync2::manage_package
 
   if $manage_package {
     package { $package_name:

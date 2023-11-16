@@ -35,46 +35,45 @@
 #     },
 #   }
 #
-# @param [Stdlib::Ensure::Service] ensure
+# @param ensure
 #   Whether the Csync2 service should be running or is stopped.
 #
-# @param [Boolean] enable
+# @param enable
 #   Whether to enable the Csync2 service at boot. 
 #
-# @param [Boolean] manage_package
+# @param manage_package
 #   Whether to install a Csync2 package.
 #
-# @param [Boolean] manage_service
+# @param manage_service
 #   Whether to handle the Csync2 service.
 #
-# @param [Stdlib::Port::Unprivileged] port
+# @param port
 #   Port ion Csync2 listens. Only effects if service is used.
 #
-# @param [Optional[Stdlib::Base64]] ssl_cert
+# @param ssl_cert
 #   The certificate to use for TLS connections. It will be stored into the file specified in ssl_cert_path.
 #   If is set, you've also to set parameter ssl_key. Leaving both unset, you must manage the content of
 #   ssl_cert_path and ssl_key_path yourself.
 #
-# @param [Optional[Stdlib::Base64]] ssl_key
+# @param ssl_key
 #   The private key to use for TLS connections. It will be stored into the file specified in ssl_key_path.
 #   If is set, you've also to set parameter ssl_cert. Leaving both unset, you must manage the content of
 #   ssl_cert_path and ssl_key_path yourself.
 #
-# @param [Hash[String,Hash]] groups
+# @param groups
 #   Handles one or more groups.
 #
-class csync2(
+class csync2 (
   Stdlib::Ensure::Service      $ensure         = 'running',
   Boolean                      $enable         = true,
   Boolean                      $manage_package = true,
   Boolean                      $manage_service = true,
   Stdlib::Port::Unprivileged   $port           = 30865,
-  Optional[Stdlib::Base64]     $ssl_cert       = undef,
-  Optional[Stdlib::Base64]     $ssl_key        = undef,
+  Optional[String]             $ssl_cert       = undef,
+  Optional[String]             $ssl_key        = undef,
   Hash[String, Hash]           $groups         = {},
 ) {
-
-  require ::csync2::globals
+  require csync2::globals
 
   if $ssl_cert or $ssl_key {
     unless $ssl_cert and $ssl_key {
@@ -83,15 +82,15 @@ class csync2(
   }
 
   Class['csync2::install']
-    -> Class['csync2::config']
-    ~> Class['csync2::service']
+  -> Class['csync2::config']
+  ~> Class['csync2::service']
 
   contain csync2::install
   contain csync2::config
   contain csync2::service
 
   $groups.each |String $grp_name, Hash $grp_config| {
-    ::csync2::group { $grp_name:
+    csync2::group { $grp_name:
       * => $grp_config,
     }
   }
