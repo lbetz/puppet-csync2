@@ -12,6 +12,7 @@ class csync2::config {
   $ssl_cert       = $csync2::ssl_cert
   $ssl_key        = $csync2::ssl_key
   $port           = $csync2::port
+  $service_opts   = $csync2::globals::service_opts
 
   if $ssl_key and $ssl_cert {
     file {

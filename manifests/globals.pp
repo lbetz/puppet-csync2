@@ -24,6 +24,9 @@
 # @param ssl_key_path
 #   Path to the file includes the private key.
 #
+# @param [String] service_opts
+#   Additional options to the systemd service.
+#
 class csync2::globals (
   String                 $package_name,
   String                 $service_name,
@@ -32,6 +35,7 @@ class csync2::globals (
   Stdlib::Absolutepath   $csync2_bin,
   Stdlib::Absolutepath   $ssl_cert_path,
   Stdlib::Absolutepath   $ssl_key_path,
+  String                 $service_opts = '',
 ) {
   assert_private()
 }
