@@ -21,16 +21,16 @@ start on boot and will be restarted if stopped.
 
 ### Defined types
 
-* [`csync2::group`](#csync2group): Manages a Csync2 group.
+* [`csync2::group`](#csync2--group): Manages a Csync2 group.
 
 ### Data types
 
-* [`Csync2::GroupBlock`](#csync2groupblock): A strict type for group blocks
-* [`Csync2::GroupBlockAction`](#csync2groupblockaction): A strict type for group block actions
+* [`Csync2::GroupBlock`](#Csync2--GroupBlock): A strict type for group blocks
+* [`Csync2::GroupBlockAction`](#Csync2--GroupBlockAction): A strict type for group block actions
 
 ## Classes
 
-### `csync2`
+### <a name="csync2"></a>`csync2`
 
 Manages cluster software Csync2.
 
@@ -82,9 +82,18 @@ class { 'csync2':
 
 #### Parameters
 
-The following parameters are available in the `csync2` class.
+The following parameters are available in the `csync2` class:
 
-##### `ensure`
+* [`ensure`](#-csync2--ensure)
+* [`enable`](#-csync2--enable)
+* [`manage_package`](#-csync2--manage_package)
+* [`manage_service`](#-csync2--manage_service)
+* [`port`](#-csync2--port)
+* [`ssl_cert`](#-csync2--ssl_cert)
+* [`ssl_key`](#-csync2--ssl_key)
+* [`groups`](#-csync2--groups)
+
+##### <a name="-csync2--ensure"></a>`ensure`
 
 Data type: `Stdlib::Ensure::Service`
 
@@ -92,31 +101,31 @@ Whether the Csync2 service should be running or is stopped.
 
 Default value: `'running'`
 
-##### `enable`
+##### <a name="-csync2--enable"></a>`enable`
 
 Data type: `Boolean`
 
 Whether to enable the Csync2 service at boot.
 
-Default value: ``true``
+Default value: `true`
 
-##### `manage_package`
+##### <a name="-csync2--manage_package"></a>`manage_package`
 
 Data type: `Boolean`
 
 Whether to install a Csync2 package.
 
-Default value: ``true``
+Default value: `true`
 
-##### `manage_service`
+##### <a name="-csync2--manage_service"></a>`manage_service`
 
 Data type: `Boolean`
 
 Whether to handle the Csync2 service.
 
-Default value: ``true``
+Default value: `true`
 
-##### `port`
+##### <a name="-csync2--port"></a>`port`
 
 Data type: `Stdlib::Port::Unprivileged`
 
@@ -124,27 +133,27 @@ Port ion Csync2 listens. Only effects if service is used.
 
 Default value: `30865`
 
-##### `ssl_cert`
+##### <a name="-csync2--ssl_cert"></a>`ssl_cert`
 
-Data type: `Optional[Stdlib::Base64]`
+Data type: `Optional[String]`
 
 The certificate to use for TLS connections. It will be stored into the file specified in ssl_cert_path.
 If is set, you've also to set parameter ssl_key. Leaving both unset, you must manage the content of
 ssl_cert_path and ssl_key_path yourself.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `ssl_key`
+##### <a name="-csync2--ssl_key"></a>`ssl_key`
 
-Data type: `Optional[Stdlib::Base64]`
+Data type: `Optional[String]`
 
 The private key to use for TLS connections. It will be stored into the file specified in ssl_key_path.
 If is set, you've also to set parameter ssl_cert. Leaving both unset, you must manage the content of
 ssl_cert_path and ssl_key_path yourself.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `groups`
+##### <a name="-csync2--groups"></a>`groups`
 
 Data type: `Hash[String, Hash]`
 
@@ -154,7 +163,7 @@ Default value: `{}`
 
 ## Defined types
 
-### `csync2::group`
+### <a name="csync2--group"></a>`csync2::group`
 
 Manages a Csync2 group.
 
@@ -202,21 +211,17 @@ csync2::group { 'monitoring':
 
 #### Parameters
 
-The following parameters are available in the `csync2::group` defined type.
+The following parameters are available in the `csync2::group` defined type:
 
-##### `hosts`
+* [`ensure`](#-csync2--group--ensure)
+* [`hosts`](#-csync2--group--hosts)
+* [`key`](#-csync2--group--key)
+* [`group`](#-csync2--group--group)
+* [`key_path`](#-csync2--group--key_path)
+* [`blocks`](#-csync2--group--blocks)
+* [`auto`](#-csync2--group--auto)
 
-Data type: `Array[Stdlib::Host]`
-
-All involved hosts of the group.
-
-##### `key`
-
-Data type: `String`
-
-The symmetric key to authenticate hosts to each other.
-
-##### `ensure`
+##### <a name="-csync2--group--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -224,15 +229,35 @@ Wether to use or to remove the group.
 
 Default value: `'present'`
 
-##### `key_path`
+##### <a name="-csync2--group--hosts"></a>`hosts`
+
+Data type: `Array[Stdlib::Host]`
+
+All involved hosts of the group.
+
+##### <a name="-csync2--group--key"></a>`key`
+
+Data type: `String`
+
+The symmetric key to authenticate hosts to each other.
+
+##### <a name="-csync2--group--group"></a>`group`
+
+Data type: `String`
+
+Name of the group.
+
+Default value: `$title`
+
+##### <a name="-csync2--group--key_path"></a>`key_path`
 
 Data type: `Optional[Stdlib::Absolutepath]`
 
 Path to the file the key will save to.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `blocks`
+##### <a name="-csync2--group--blocks"></a>`blocks`
 
 Data type: `Array[Csync2::GroupBlock]`
 
@@ -242,7 +267,7 @@ and has to constist of 'pattern', 'exec', 'logfile' and 'do' as keys.
 
 Default value: `{}`
 
-##### `auto`
+##### <a name="-csync2--group--auto"></a>`auto`
 
 Data type: `Enum['none', 'younger']`
 
@@ -250,34 +275,34 @@ Set resolution method if files have conflicts and doesn't know which to use.
 
 Default value: `'younger'`
 
-##### `group`
-
-Data type: `String`
-
-
-
-Default value: `$title`
-
 ## Data types
 
-### `Csync2::GroupBlock`
+### <a name="Csync2--GroupBlock"></a>`Csync2::GroupBlock`
 
 A strict type for group blocks
 
-Alias of `Struct[{
-  includes           => Array[String],
-  Optional[excludes] => Array[String],
-  Optional[actions]  => Array[Csync2::GroupBlockAction],
-}]`
+Alias of
 
-### `Csync2::GroupBlockAction`
+```puppet
+Struct[{
+    includes           => Array[String],
+    Optional[excludes] => Array[String],
+    Optional[actions]  => Array[Csync2::GroupBlockAction],
+}]
+```
+
+### <a name="Csync2--GroupBlockAction"></a>`Csync2::GroupBlockAction`
 
 A strict type for group block actions
 
-Alias of `Struct[{
-  pattern           => Array[String],
-  exec              => Array[String],
-  Optional[logfile] => Stdlib::Absolutepath,
-  Optional[do]      => Enum['do-local', 'do-local-only'],
-}]`
+Alias of
+
+```puppet
+Struct[{
+    pattern           => Array[String],
+    exec              => Array[String],
+    Optional[logfile] => Stdlib::Absolutepath,
+    Optional[do]      => Enum['do-local', 'do-local-only'],
+}]
+```
 

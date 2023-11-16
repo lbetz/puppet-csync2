@@ -4,14 +4,15 @@
 # @api private
 #
 class csync2::config {
+  assert_private()
 
-  $ssl_cert_path  = $::csync2::globals::ssl_cert_path
-  $ssl_key_path   = $::csync2::globals::ssl_key_path
-  $csync2_bin     = $::csync2::globals::csync2_bin
-  $ssl_cert       = $::csync2::ssl_cert
-  $ssl_key        = $::csync2::ssl_key
-  $port           = $::csync2::port
-  $service_opts   = $::csync2::globals::service_opts
+  $ssl_cert_path  = $csync2::globals::ssl_cert_path
+  $ssl_key_path   = $csync2::globals::ssl_key_path
+  $csync2_bin     = $csync2::globals::csync2_bin
+  $ssl_cert       = $csync2::ssl_cert
+  $ssl_key        = $csync2::ssl_key
+  $port           = $csync2::port
+  $service_opts   = $csync2::globals::service_opts
 
   if $ssl_key and $ssl_cert {
     file {

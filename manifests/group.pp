@@ -35,24 +35,27 @@
 #     key    => 'supersecret-2',
 #   }
 #
-# @param [Array[Stdlib::Host]] hosts
-#   All involved hosts of the group.
-#
-# @param [String] key
-#   The symmetric key to authenticate hosts to each other.
-#
-# @param [Enum['present', 'absent']] ensure
+# @param ensure
 #   Wether to use or to remove the group.
 #
-# @param [Optional[Stdlib::Absolutepath]] key_path
+# @param hosts
+#   All involved hosts of the group.
+#
+# @param key
+#   The symmetric key to authenticate hosts to each other.
+#
+# @param group
+#   Name of the group.
+#
+# @param key_path
 #   Path to the file the key will save to.
 #
-# @param [Array[Csync2::GroupBlock]] blocks
+# @param blocks
 #   Manages blocks of config snippets. A block has to be of datatype Hash and consists of
 #   'includes', 'excludes' and 'actions' as keys. The 'actions' are also an Array of Hashes
 #   and has to constist of 'pattern', 'exec', 'logfile' and 'do' as keys.
 #
-# @param [Enum['none', 'younger']] auto
+# @param auto
 #   Set resolution method if files have conflicts and doesn't know which to use.
 #
 define csync2::group (
@@ -64,16 +67,16 @@ define csync2::group (
   Array[Csync2::GroupBlock]       $blocks   = {},
   Enum['none', 'younger']         $auto     = 'younger',
 ) {
+  include csync2
 
-  include ::csync2
-
-  $config_dir = $::csync2::globals::config_dir
-  $config_path = $::csync2::globals::config_path
+  $config_dir  = $csync2::globals::config_dir
+  $config_path = $csync2::globals::config_path
 
   unless $key_path {
     $_key_path = "${config_dir}/csync2.key_${group}"
   } else {
-    $_key_path = $key_path }
+    $_key_path = $key_path
+  }
 
   if $ensure == 'present' {
     concat::fragment { "csync2-group-${group}":
@@ -93,5 +96,4 @@ define csync2::group (
     mode    => '0600',
     content => "${key}\n",
   }
-
 }

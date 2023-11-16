@@ -3,41 +3,39 @@
 #
 # @api private
 #
-# @param [String] package_name
+# @param package_name
 #   Package name to manage.
 #
-# @param [String] service_name
+# @param service_name
 #   Name of the service to manage for Csync2.
 #
-# @param [Stdlib::Absolutepath] config_dir
+# @param config_dir
 #   Directory where Csync2 expected config, cert and key files.
 #
-# @param [Stdlib::Absolutepath] config_path
+# @param config_path
 #   Path to the configuration file.
 #
-# @param [Stdlib::Absolutepath] csync2_bin
+# @param csync2_bin
 #   Path to the Cysnc2 binary.
 #
-# @param [Stdlib::Absolutepath] ssl_cert_path
+# @param ssl_cert_path
 #   Path to the fiile includes the certificate.
 #
-# @param [Stdlib::Absolutepath] ssl_key_path
+# @param ssl_key_path
 #   Path to the file includes the private key.
 #
 # @param [String] service_opts
-#   Additional options to the systemd service, defaults to '-v'.
+#   Additional options to the systemd service.
 #
-class csync2::globals(
-  String                       $package_name,
-  String                       $service_name,
-  Stdlib::Absolutepath         $config_dir,
-  Stdlib::Absolutepath         $config_path,
-  Stdlib::Absolutepath         $csync2_bin,
-  Stdlib::Absolutepath         $ssl_cert_path,
-  Stdlib::Absolutepath         $ssl_key_path,
-  String                       $service_opts = '-v',
+class csync2::globals (
+  String                 $package_name,
+  String                 $service_name,
+  Stdlib::Absolutepath   $config_dir,
+  Stdlib::Absolutepath   $config_path,
+  Stdlib::Absolutepath   $csync2_bin,
+  Stdlib::Absolutepath   $ssl_cert_path,
+  Stdlib::Absolutepath   $ssl_key_path,
+  String                 $service_opts = '',
 ) {
-
   assert_private()
-
 }
