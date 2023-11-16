@@ -35,7 +35,7 @@ class csync2::globals (
   Stdlib::Absolutepath   $csync2_bin,
   Stdlib::Absolutepath   $ssl_cert_path,
   Stdlib::Absolutepath   $ssl_key_path,
-  String                 $service_opts = '',
+  Optional[String]       $service_opts = undef,
 ) {
   assert_private()
 }

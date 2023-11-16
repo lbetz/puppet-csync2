@@ -193,7 +193,7 @@ Maybe it's a better idea to use the [puppetlabs/xinetd] module to install, confi
 
 ## Reference
 
-See [REFERENCE.md](https://github.com/lbetz/puppet-csync2/blob/master/REFERENCE.md)
+See [REFERENCE.md](https://github.com/lbetz/puppet-csync2/blob/main/REFERENCE.md)
 
 
 [puppetlabs/stdlib]: https://github.com/puppetlabs/puppetlabs-stdlib
